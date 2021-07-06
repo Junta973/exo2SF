@@ -1,0 +1,16 @@
+
+{% extends 'base.html.twig' %}
+{% block content %}
+    {% for categorie in categories %}
+
+        <div class="card">
+
+            <a href="{{ path('categorieShow', {'id': categorie.id}) }}">
+                <h1>{{ categorie.title }}</h1>
+                <p>{{ categorie.content }}</p>
+                <em>{{ categorie.id }}</em>
+            </a>
+        </div>
+
+    {% endfor %}
+{% endblock content %}
