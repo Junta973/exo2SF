@@ -61,7 +61,8 @@ private $categories = [
         // lui passer un tableau en second parametre, avec toutes les
         // variables que je veux utiliser
         return $this->render('categorieShow.html.twig', [
-            'article' => $this->categories[$id]
+            'categorie' => $this->categories[$id]
         ]);
     }
 }
+
