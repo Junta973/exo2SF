@@ -3,11 +3,11 @@
 
 namespace App\Entity;
 
-
+use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass=ArticleRepository::class)
  */
 class Article
 {
@@ -17,6 +17,14 @@ class Article
      * @ORM\GeneratedValue()
      */
     private $id;
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * @ORM\Column(type="string")

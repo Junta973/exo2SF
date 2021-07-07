@@ -7,7 +7,7 @@
 header{
     width: 100%;
     height: 10vh;
-    background: darkred;
+    background: #030303;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -16,7 +16,7 @@ header{
 footer{
     width: 100%;
     height: 15vh;
-    background: darkred;
+    background: #030303;
 }
 
 img{
@@ -33,8 +33,8 @@ main{
 .card{
     width: 40%;
     min-height:250px;
-    border-radius: 50px;
-    background: #82008b;
+    border-radius: 10px;
+    background: #524c52;
     margin: 20px;
     padding: 20px;
     text-align: center;

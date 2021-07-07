@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+    {% for article in articles %}
+
+        <div class="card">
+
+            <a href="{{ path('articleView', {'id': article.id}) }}">
+                <h1>{{ article.title }}</h1>
+                <p>{{ article.content }}</p>
+                <em>{{ article.id }}</em>
+            </a>
+        </div>
+
+    {% endfor %}
+{% endblock content %}
