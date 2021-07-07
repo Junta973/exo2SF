@@ -50,7 +50,7 @@ private $categories = [
 
     /**Création de la seconde route pour afficher un seul article*/
     /**
-     * @Route("/categorie/{id}", name="categorieShow")
+     * @Route("/categories/{id}", name="categorieShow")
      */
     public function categorieShow($id)
     {
