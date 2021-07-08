@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-{% block content %}
+{% block main %}
     {% for article in articles %}
 
         <div class="card">
@@ -8,8 +8,9 @@
                 <h1>{{ article.title }}</h1>
                 <p>{{ article.content }}</p>
                 <em>{{ article.id }}</em>
+                <p class="pcategory">Categorie : {{article.category.title}}</p>
             </a>
         </div>
 
     {% endfor %}
-{% endblock content %}
+{% endblock main %}

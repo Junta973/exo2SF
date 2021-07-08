@@ -1,11 +1,12 @@
 {% extends 'base.html.twig'  %}
-{% block content %}
+{% block main %}
     <div class="card">
 
 
         <h1>{{ article.title }}</h1>
         <p>{{ article.content }}</p>
         <em>{{ article.id }}</em>
+        <p class="pcategory">Categorie : {{article.category.title}}</p>
 
     </div>
-{% endblock content %}
+{% endblock main %}
