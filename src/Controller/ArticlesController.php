@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ArticlesController extends AbstractController
@@ -43,10 +44,10 @@ class ArticlesController extends AbstractController
     /**
      * @Route("/search", name="search")
      */
-    public function search(ArticleRepository $articleRepository)
+    public function search(ArticleRepository $articleRepository,Request $request)
     {
         // représente le mot taper dans le formulaire
-        $term = 'fusée';
+        $term = $request->query->get('q');
 
 
         // renvoie vers la requete SQL que l'on a crée dans ArticleRepository

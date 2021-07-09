@@ -15,6 +15,7 @@ class PageController extends AbstractController
      */
     public function home()
     {
-        dump("Vous sur la home page"); die;
+        //Je demande de la renvoyer à ma vue
+        return $this->render('base.html.twig');
     }
 }
