@@ -40,4 +40,24 @@ class ArticlesController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/search", name="search")
+     */
+    public function search(ArticleRepository $articleRepository)
+    {
+        // représente le mot taper dans le formulaire
+        $term = 'fusée';
+
+
+        // renvoie vers la requete SQL que l'on a crée dans ArticleRepository
+        // en fonction du mot taper dans le formulaire
+        $articles = $articleRepository->searchByTerm($term);
+
+        return $this->render('article_search.html.twig', [
+            'articles'=>$articles,
+            'term'=>$term
+        ]);
+
+
+    }
 }

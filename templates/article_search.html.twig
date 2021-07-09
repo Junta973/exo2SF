@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+{% block main %}
+    {% for article in articles %}
+
+
+        {% if article.isPublished %}
+
+                <div class="card">
+
+                    <a href="{{ path('articleView', {'id': article.id}) }}">
+                        <h1>{{ article.title }}</h1>
+                        <p>{{ article.content }}</p>
+                        <em>{{ article.id }}</em>
+                        <p class="pcategory">Categorie : {{article.category.title}}</p>
+                        <p class="pcategory">Tag : {{article.tag.title}}</p>
+                    </a>
+                </div>
+        {% endif %}
+    {% endfor %}
+{% endblock main %}
