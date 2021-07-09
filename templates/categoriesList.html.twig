@@ -1,6 +1,6 @@
 
 {% extends 'base.html.twig' %}
-{% block content %}
+{% block main %}
     {% for categorie in categories %}
 
         <div class="card">
@@ -9,8 +9,10 @@
                 <h1>{{ categorie.title }}</h1>
                 <p>{{ categorie.description }}</p>
                 <em>{{ categorie.id }}</em>
+
+
             </a>
         </div>
 
     {% endfor %}
-{% endblock content %}
+{% endblock main %}

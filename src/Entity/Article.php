@@ -114,9 +114,30 @@ class Article
     }
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="articles")
      */
     private $category;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Tags", inversedBy="articles")
+     */
+    private $tag;
+
+    /**
+     * @return mixed
+     */
+    public function getTag()
+    {
+        return $this->tag;
+    }
+
+    /**
+     * @param mixed $tag
+     */
+    public function setTag($tag): void
+    {
+        $this->tag = $tag;
+    }
 
     /**
      * @return mixed
