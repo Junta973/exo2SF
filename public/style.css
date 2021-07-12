@@ -35,7 +35,7 @@ main{
     width: 40%;
     min-height:250px;
     border-radius: 10px;
-    background: #3c3c3e;
+    background: rgba(60, 60, 62, 0.74);
     margin: 20px;
     padding: 20px;
     text-align: center;

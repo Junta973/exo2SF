@@ -3,12 +3,24 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CategoriesController extends AbstractController
 {
+    /**
+     * @Route("/categories/insert", name="categorieInsert")
+     */
+    public function insertCategorie()
+    {
+        //J'utilise l'entité Categorie, pour créer une nouvelle categorie en BDD
+        //une instance de l'entité Categorie = un enregistrement de categorie en BDD
+        $categorie = new Category()
+    }
+
+
 
     /**Création de la première route*/
     /**
