@@ -13,6 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ArticlesController extends AbstractController
 {
+    //correspond au create du crud
     /**
      * @Route("/articles/insert", name="articleInsert")
      */
@@ -23,8 +24,8 @@ class ArticlesController extends AbstractController
         $article = new Article ();
 
         //j'utilise les setters de l'entité Article pour renseigner les valeurs des colonnnes
-        $article->setTitle('Titre article depuis le controleur');
-        $article->setContent('Le contenu de l\'article est rentré ici');
+        $article->setTitle('Tik Tok ou la dechance des jeunes');
+        $article->setContent('On peut dire que les jeunes sont dans la merde');
         $article->setIspublished(true);
         $article->setCreatedAt(new \DateTime('NOW'));
 
@@ -34,8 +35,39 @@ class ArticlesController extends AbstractController
         //je récupère toutes les entités pré-sauvegardé et je les insère en BDD
         $entityManager->flush();
 
+        return $this->redirectToRoute("articlesList");
+    }
+
+
+    //Correspond a l'update/modification du crud
+    /**
+     * @Route("/articles/update/{id}", name="articleUpdate")
+     */
+    public function updateArticle($id,EntityManagerInterface $entityManager,ArticleRepository $articleRepository)
+    {
+        $article = $articleRepository->find($id);
+
+        $article->setTitle("Je modifie le titre");
+        $entityManager->persist($article);
+        $entityManager->flush($article);
+
         dump('ok');die;
     }
+
+    //Correspond au delete/suppression du crud
+    /**
+     * @Route("/articles/delete/{id}",name="articleDelete")
+     */
+    public function deleteArticle ($id,EntityManagerInterface $entityManager,ArticleRepository $articleRepository)
+    {
+        $article = $articleRepository->find($id);
+
+        $entityManager->remove($article);
+        $entityManager->flush();
+
+        return $this->redirectToRoute("articlesList");
+    }
+
 
 
     /**

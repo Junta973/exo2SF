@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Repository\CategoryRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -13,11 +14,26 @@ class CategoriesController extends AbstractController
     /**
      * @Route("/categories/insert", name="categorieInsert")
      */
-    public function insertCategorie()
+    public function insertCategorie(EntityManagerInterface $entityManager)
     {
         //J'utilise l'entité Categorie, pour créer une nouvelle categorie en BDD
         //une instance de l'entité Categorie = un enregistrement de categorie en BDD
-        $categorie = new Category()
+        $categorie = new Category();
+
+        //j'utilise les setter de l'entité Category pour renseigner les valeurs des colonnes
+        $categorie->setTitle('Immobilier');
+        $categorie->setDescription('Liste tout les articles immobilier');
+
+        //je prend toutes les entités créées (ici une seule) et je les pré-sauvegarde
+        $entityManager->persist($categorie);
+
+        //je recupère toute les entités pré-sauvegardé et je les insère en BDD
+        $entityManager->flush();
+
+        //Je créer un dump pour vérifier mon retour, on peut ausssi renvoyer vers un twig pour
+        //afficher ce que l'on a inseré.
+        //Penser a vérifier en BDD que l'insertion s'est bien déroulé
+        dump('ok');die;
     }
 
 
