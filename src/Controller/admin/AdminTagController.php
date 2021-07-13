@@ -28,7 +28,7 @@ class AdminTagController extends AbstractController
 
 
     /**
-     * @Route("/tags/{id}", name="tagsView")
+     * @Route("/admin/tags/{id}", name="admin_tags_view")
      */
     public function tagsView($id,TagsRepository $tagsRepository)
     {
@@ -43,7 +43,7 @@ class AdminTagController extends AbstractController
 
 
         // je renvoie à ma page tagsView les infos par rapport à l'ID
-        return $this->render('tags_view.html.twig', [
+        return $this->render('admin/admin_tags_view.html.twig', [
             'tag' => $tag
         ]);
 
