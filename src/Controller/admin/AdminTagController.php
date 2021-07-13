@@ -39,6 +39,7 @@ class AdminTagController extends AbstractController
     }
 
 
+
     //Correspond a update du CRUD pour les Tags
     /**
      * @Route("/admin/tags/update/{id}", name="admin_tag_update")
@@ -51,6 +52,20 @@ class AdminTagController extends AbstractController
 
             $entityManager->persist($tag);
             $entityManager->flush();
+
+        return $this->redirectToRoute("admin_tags_list");
+    }
+
+    //Correspond au delete du CRUD pour les Tags
+    /**
+     * @Route("/admin/tags/{id}", name="admin_tag_delete")
+     */
+    public function deleteTag($id,EntityManagerInterface $entityManager,TagsRepository $tagsRepository)
+    {
+        $tag = $tagsRepository->find($id);
+
+        $entityManager->remove($tag);
+        $entityManager->flush();
 
         return $this->redirectToRoute("admin_tags_list");
     }

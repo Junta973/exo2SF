@@ -5,6 +5,7 @@ namespace App\Controller\admin;
 
 
 use App\Entity\Article;
+use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,7 +16,7 @@ class AdminArticlesController extends AbstractController
 {
     //correspond au create du crud
     /**
-     * @Route("/admin/articles/insert", name="admin_article_insert")
+     * @Route("/admin/articles/static/insert", name="admin_article_static_insert")
      */
     public function insertArticle(EntityManagerInterface $entityManager)
     {
@@ -38,6 +39,21 @@ class AdminArticlesController extends AbstractController
         return $this->redirectToRoute("admin_article_list");
     }
 
+
+    /**
+     * @Route("/admin/articles/insert", name="admin_article_insert")
+     */
+    public function insertArticleViaForm()
+    {
+        $article = new Article();
+
+        $articleform = $this->createForm(ArticleType::class,$article);
+
+        return $this->render('admin/admin_insert.html.twig',[
+            'articleForm'=> $articleform->createView()
+        ]);
+
+    }
 
     //Correspond a l'update/modification du crud
     /**
