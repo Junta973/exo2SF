@@ -1,11 +1,11 @@
 
-{% extends 'base.html.twig' %}
+{% extends 'front/base.html.twig' %}
 {% block main %}
     {% for categorie in categories %}
 
         <div class="card">
 
-            <a href="{{ path('categorieShow', {'id': categorie.id}) }}">
+            <a href="{{ path('categorie_show', {'id': categorie.id}) }}">
                 <h1>{{ categorie.title }}</h1>
                 <p>{{ categorie.description }}</p>
                 <em>{{ categorie.id }}</em>

@@ -1,10 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends 'front/base.html.twig' %}
 {% block main %}
     {% for article in articles %}
 
         <div class="card">
 
-            <a href="{{ path('articleView', {'id': article.id}) }}">
+            <a href="{{ path('article_view', {'id': article.id}) }}">
                 <h1>{{ article.title }}</h1>
                 <p>{{ article.content }}</p>
                 <em>{{ article.id }}</em>

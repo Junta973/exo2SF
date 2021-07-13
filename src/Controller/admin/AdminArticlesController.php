@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Controller;
+namespace App\Controller\admin;
 
 
 use App\Entity\Article;
@@ -11,11 +11,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ArticlesController extends AbstractController
+class AdminArticlesController extends AbstractController
 {
     //correspond au create du crud
     /**
-     * @Route("/articles/insert", name="articleInsert")
+     * @Route("/admin/articles/insert", name="admin_article_insert")
      */
     public function insertArticle(EntityManagerInterface $entityManager)
     {
@@ -25,7 +25,7 @@ class ArticlesController extends AbstractController
 
         //j'utilise les setters de l'entité Article pour renseigner les valeurs des colonnnes
         $article->setTitle('Tik Tok ou la dechance des jeunes');
-        $article->setContent('On peut dire que les jeunes sont dans la merde');
+        $article->setContent('On peut dire que les jeunes sont vraiment mais vraiment dans la merde');
         $article->setIspublished(true);
         $article->setCreatedAt(new \DateTime('NOW'));
 
@@ -35,13 +35,13 @@ class ArticlesController extends AbstractController
         //je récupère toutes les entités pré-sauvegardé et je les insère en BDD
         $entityManager->flush();
 
-        return $this->redirectToRoute("articlesList");
+        return $this->redirectToRoute("admin_article_list");
     }
 
 
     //Correspond a l'update/modification du crud
     /**
-     * @Route("/articles/update/{id}", name="articleUpdate")
+     * @Route("/admin/articles/update/{id}", name="admin_article_update")
      */
     public function updateArticle($id,EntityManagerInterface $entityManager,ArticleRepository $articleRepository)
     {
@@ -51,12 +51,13 @@ class ArticlesController extends AbstractController
         $entityManager->persist($article);
         $entityManager->flush($article);
 
-        dump('ok');die;
+        return $this->redirectToRoute("admin_article_list");
     }
+
 
     //Correspond au delete/suppression du crud
     /**
-     * @Route("/articles/delete/{id}",name="articleDelete")
+     * @Route("/admin/articles/delete/{id}",name="admin_article_delete")
      */
     public function deleteArticle ($id,EntityManagerInterface $entityManager,ArticleRepository $articleRepository)
     {
@@ -65,60 +66,23 @@ class ArticlesController extends AbstractController
         $entityManager->remove($article);
         $entityManager->flush();
 
-        return $this->redirectToRoute("articlesList");
+        return $this->redirectToRoute("admin_article_list");
     }
 
 
-
+    //Correspond à la page liste des articles
     /**
-     * @Route("/articles", name="articlesList")
+     * @Route("/admin/articles", name="admin_article_list")
      */
-    public function articlesView (ArticleRepository $articleRepository)
+    public function articlesList (ArticleRepository $articleRepository)
     {
         // Je fais ma requete sql
         $articles = $articleRepository->findAll();
 
         //Je demande de la renvoyer à ma vue
-        return $this->render('articlesList.html.twig',[
+        return $this->render('admin/admin_article_list.html.twig',[
             'articles'=>$articles
         ]);
-    }
-
-
-    /**
-     * @Route("/articles/{id}", name="articleView")
-     */
-    public function article($id, ArticleRepository $articleRepository)
-    {
-
-        // afficher un article en fonction de l'id renseigné dans l'url (en wildcard) avec la requete sql
-        $article = $articleRepository->find($id);
-
-        //Je renvoie à ma vue
-        return $this->render('articleView.html.twig', [
-            'article' => $article
-        ]);
-    }
-
-    /**
-     * @Route("/search", name="search")
-     */
-    public function search(ArticleRepository $articleRepository,Request $request)
-    {
-        // représente le mot taper dans le formulaire
-        $term = $request->query->get('q');
-
-
-        // renvoie vers la requete SQL que l'on a crée dans ArticleRepository
-        // en fonction du mot taper dans le formulaire
-        $articles = $articleRepository->searchByTerm($term);
-
-        return $this->render('article_search.html.twig', [
-            'articles'=>$articles,
-            'term'=>$term
-        ]);
-
-
     }
 
 

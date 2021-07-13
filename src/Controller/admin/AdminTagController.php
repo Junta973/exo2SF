@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Controller;
+namespace App\Controller\admin;
 
 
 use App\Repository\TagsRepository;
@@ -9,10 +9,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
-class TagController extends AbstractController
+class AdminTagController extends AbstractController
 {
     /**
-     * @Route("/tags", name="tagsList")
+     * @Route("/admin/tags", name="admin_tags_list")
      */
     public function tagList(TagsRepository $tagsRepository)
     {
@@ -21,7 +21,7 @@ class TagController extends AbstractController
 
 
         //Je renvoie vers ma page tagList les infos récolté
-        return $this->render('tagsList.html.twig', [
+        return $this->render('admin/admin_tags_list.html.twig', [
             'tags' => $tags
         ]);
     }
@@ -43,7 +43,7 @@ class TagController extends AbstractController
 
 
         // je renvoie à ma page tagsView les infos par rapport à l'ID
-        return $this->render('tagsView.html.twig', [
+        return $this->render('tags_view.html.twig', [
             'tag' => $tag
         ]);
 

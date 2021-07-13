@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Controller;
+namespace App\Controller\admin;
 
 use App\Entity\Category;
 use App\Repository\CategoryRepository;
@@ -9,10 +9,10 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class CategoriesController extends AbstractController
+class AdminCategoriesController extends AbstractController
 {
     /**
-     * @Route("/categories/insert", name="categorieInsert")
+     * @Route("/categories/insert", name="categorie_insert")
      */
     public function insertCategorie(EntityManagerInterface $entityManager)
     {
@@ -33,39 +33,27 @@ class CategoriesController extends AbstractController
         //Je créer un dump pour vérifier mon retour, on peut ausssi renvoyer vers un twig pour
         //afficher ce que l'on a inseré.
         //Penser a vérifier en BDD que l'insertion s'est bien déroulé
-        dump('ok');die;
-    }
 
+        return $this->render('admin/admin_categorie_list.html.twig', [
+            'categories' => $categories
+        ]);
+    }
 
 
     /**Création de la première route*/
     /**
-     * @Route ("/categories", name="categories")
+     * @Route ("/admin/categories", name="admin_categories")
      */
     public function categorieList(CategoryRepository $categoryRepository)
     {
         // Je fais ma requete sql
         $categories = $categoryRepository->findAll();
 
-        return $this->render('categoriesList.html.twig', [
+        //Je demande de la renvoyer à ma vue
+        return $this->render('admin/admin_categorie_list.html.twig', [
             'categories' => $categories
         ]);
     }
 
-
-    /**Création de la seconde route pour afficher un seul article*/
-    /**
-     * @Route("/categories/{id}", name="categorieShow")
-     */
-    public function categorieShow($id, CategoryRepository $categoryRepository)
-    {
-
-        // afficher un article en fonction de l'id renseigné dans l'url (en wildcard) avec la requete sql
-        $categories= $categoryRepository->find($id);
-
-        return $this->render('categorieShow.html.twig', [
-            'categorie' => $categories
-        ]);
-    }
 }
 

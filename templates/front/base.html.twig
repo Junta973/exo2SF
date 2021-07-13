@@ -1,0 +1,39 @@
+<!
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %} {% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('style.css') }}">
+
+</head>
+<body>
+<header>
+    <nav>
+        <div>
+            <img src:"" alt:"logo">
+        </div>
+        <ul>
+            <a href="http://localhost/SYMFONY/my_project_name/public/articles"><li>Home</li></a>
+            <a href="http://localhost/SYMFONY/my_project_name/public/categories"><li>Categorie</li></a>
+            <a href="http://localhost/SYMFONY/my_project_name/public/tags"><li>Tags</li></a>
+            <a href=""><li>About us</li></a>
+
+            <form action="{{ path('search') }}" method="get">
+                <input type="text" name="q" placeholder="recherche...">
+                <input type="submit" value="Rechercher">
+            </form>
+        </ul>
+    </nav>
+</header>
+<main>
+    {% block main %} {% endblock %}
+</main>
+
+<footer>
+
+</footer>
+</body>
+</html>
