@@ -4,23 +4,24 @@
 
     {#ouverture de la balise form #}
     {{ form_start(articleForm) }}
+        <h1>Ajouter votre article</h1>
 
         <div class="form-group">
-            {#permet de rendre le label du champs title #}
-            {{ form_label(articleForm.title, 'Titre', {'label_attr' : {'class'  : 'label'}}) }}
+
             {#permet de rendre l'input du champs title #}
-            {{ form_widget(articleForm.title, {'attr' : {'class'  : 'form-control'}}) }}
+            {{ form_widget(articleForm.title, {'attr' : {'class'  : 'FormInput','placeholder' : 'Titre'}}) }}
         </div>
 
 
         <div class="form-group">
-            {#permet de rendre le label du champs content #}
-            {{ form_label(articleForm.content, 'Contenu', {'label_attr' : {'class'  : 'label'}}) }}
+
             {#permet de rendre l'input du champs content #}
-            {{ form_widget(articleForm.content, {'attr' : {'class'  : 'form-control'}}) }}
+            {{ form_widget(articleForm.content, {'attr' : {'class'  : 'TextArea','placeholder' : 'Article'}}) }}
         </div>
 
         <div class="form-group">
+            {#permet de rendre le label du champs ispublished #}
+            {{ form_label(articleForm.createdAt, 'Date de parution', {'label_attr' : {'class'  : 'label'}}) }}
             {#permet de rendre l'input du champs createdAt #}
             {{ form_widget(articleForm.createdAt,{'attr' : {'class'  : 'form-control'}}) }}
         </div>
@@ -34,7 +35,7 @@
 
         <div>
             {#permet de rendre le bouton submit #}
-            {{ form_widget(articleForm.submit,{'attr' : {'class'  : 'btn'}}) }}
+            {{ form_widget(articleForm.submit,{'attr' : {'class'  : 'btn'},'label': 'Soumettre'}) }}
         </div>
 
     {#fermerture de la balise form #}
