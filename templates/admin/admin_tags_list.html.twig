@@ -8,6 +8,9 @@
                 <a href="{{ path('tags_view', {'id': tag.id }) }}">
                     <p style="background-color: {{ tag.color }}">{{ tag.title }}</p>
                 </a>
+                <a href="{{ path('admin_tag_update',{'id':tag.id}) }}">Mettre à jour</a><br>
+                <a href="{{ path('admin_tag_delete',{'id':tag.id}) }}">Supprimer</a>
+
             </article>
         {% endfor %}
     </div>

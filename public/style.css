@@ -71,6 +71,7 @@ p{
 .tag-container {
     display: flex;
     flex-wrap: wrap;
+
 }
 
 .tag {
@@ -78,9 +79,20 @@ p{
     text-align: center;
     border: 1px solid black;
     margin-top: 100px;
+    background-color: #686666;
 }
 
 .pcategory{
     margin-top: 10px;
     font-family: "American Typewriter";
+}
+
+
+.form-group{
+    
+}
+
+.label{
+    font-size: 1em;
+    font-weight: bold;
 }

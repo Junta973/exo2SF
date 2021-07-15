@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AdminArticlesController extends AbstractController
 {
-    //correspond au create du crud
+    //correspond au create du crud en dur
     /**
      * @Route("/admin/articles/static/insert", name="admin_article_static_insert")
      */
@@ -36,18 +36,32 @@ class AdminArticlesController extends AbstractController
         //je récupère toutes les entités pré-sauvegardé et je les insère en BDD
         $entityManager->flush();
 
-        return $this->redirectToRoute("admin_article_list");
+        return $this->redirectToRoute('admin_article_list');
     }
 
-
+    //correspond au create du crud par formulaire
     /**
      * @Route("/admin/articles/insert", name="admin_article_insert")
      */
-    public function insertArticleViaForm()
+    public function insertArticleViaForm(Request $request,EntityManagerInterface $entityManager)
     {
         $article = new Article();
 
+        // on génère le formulaire en utilisant le gabarit + une instance de l'entité Article
         $articleform = $this->createForm(ArticleType::class,$article);
+
+        // on lie le formulaire aux données de POST (aux données envoyées en POST)
+        $articleform->handleRequest($request);
+
+        // si le formulaire a été posté et qu'il est valide (que tous les champs
+        // obligatoires sont remplis correctement), alors on enregistre l'article
+        //crééé en BDD
+        if($articleform->isSubmitted() && $articleform->isValid()){
+            $entityManager->persist($article);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('admin_article_list');
+        }
 
         return $this->render('admin/admin_insert.html.twig',[
             'articleForm'=> $articleform->createView()
