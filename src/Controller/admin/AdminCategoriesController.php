@@ -77,6 +77,9 @@ class AdminCategoriesController extends AbstractController
             $entityManager->persist($categorie);
             $entityManager->flush();
 
+            //Stock un message flash et l'affichera sur la prochaine page
+            $this->addFlash('success', 'Categorie Created! Votre categorie '. $categorie->getTitle().' a bien été ajouté!');
+
             return $this->redirectToRoute('admin_categories_list');
         }
 
