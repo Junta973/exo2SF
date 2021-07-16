@@ -54,7 +54,20 @@ li{
 }
 a{
     text-decoration: none;
-    color: white;
+    color: black;
+}
+
+.btn-add{
+    display:inline;
+    height : 40px;
+    text-align: center;
+    width: 5%;
+    background-color: #5ab673;
+    color: #DDDDDD;
+    border-radius: 20px;
+    border: 1px solid black;
+    cursor: pointer;
+    margin: 10px;
 }
 
 h1{
@@ -111,6 +124,14 @@ p{
     font-weight: bold;
 }
 
+.form-control{
+    display: flex;
+    justify-content: space-evenly;
+    width: 65%;
+    margin: 0 20px;
+    background-color: white;
+}
+
 .btn{
     height : 30px;
     width: 35%;
@@ -120,4 +141,15 @@ p{
     border: 1px solid black;
     cursor: pointer;
     margin-bottom: 10px;
+
+}
+
+.flash-success {
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: white;
+    background-color: lightgreen;
+    font-size: 20px;
+
 }

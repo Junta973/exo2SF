@@ -1,5 +1,6 @@
 {% extends 'admin/admin_base.html.twig' %}
 {% block main %}
+
     {% for article in articles %}
 
         <div class="card">
@@ -8,10 +9,11 @@
                 <h1>{{ article.title }}</h1>
                 <p>{{ article.content }}</p>
                 <em>{{ article.id }}</em><br>
-                <a href="{{ path('admin_article_delete', {'id': article.id }) }}">Supprimer</a><br>
-                <a href="{{ path('admin_article_update', {'id': article.id }) }}">Mettre à jour</a>
+                <a href="{{ path('admin_article_update', {'id': article.id }) }}">Mettre à jour</a><br>
+                <a href="{{ path('admin_article_delete', {'id': article.id }) }}">Supprimer</a>
             </a>
         </div>
-
     {% endfor %}
+
+    <a class="btn-add" href="{{ path('admin_article_insert') }}">Ajouter un article</a>
 {% endblock main %}

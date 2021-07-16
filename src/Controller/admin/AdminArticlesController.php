@@ -60,10 +60,13 @@ class AdminArticlesController extends AbstractController
             $entityManager->persist($article);
             $entityManager->flush();
 
+            //Stock un message flash et l'affichera sur la prochaine page
+            $this->addFlash('success', 'Article Created! Votre article '. $article->getTitle().' a bien été ajouté!');
+
             return $this->redirectToRoute('admin_article_list');
         }
 
-        return $this->render('admin/admin_insert.html.twig',[
+        return $this->render('admin/admin_insert.article.html.twig',[
             'articleForm'=> $articleform->createView()
         ]);
 
@@ -71,7 +74,7 @@ class AdminArticlesController extends AbstractController
 
     //Correspond a l'update/modification du crud
     /**
-     * @Route("/admin/articles/update/{id}", name="admin_article_update")
+     * @Route("/admin/articles/static/update/{id}", name="admin_article_static_update")
      */
     public function updateArticle($id,EntityManagerInterface $entityManager,ArticleRepository $articleRepository)
     {
@@ -85,6 +88,40 @@ class AdminArticlesController extends AbstractController
     }
 
 
+    //Correspond a l'update via formulaire/modification du crud
+    /**
+     * @Route("/admin/articles/update/{id}", name="admin_article_update")
+     */
+    public function updateArticleViaForm($id,EntityManagerInterface $entityManager,
+                                         ArticleRepository $articleRepository, Request $request)
+    {
+        //pour insérer un article : $article = new Article ();
+        $article = $articleRepository->find($id);
+
+        //On génère le formulaire en utlisant le gabarit + une instance de l'entité Article
+        $articleform = $this->createForm(ArticleType::class,$article);
+
+        //On lie le formulaire au donnée de POST (aux donnée envoyé en POST)
+        $articleform->handleRequest($request);
+
+        // si le formulaire a été posté et qu'il est valide (que tous les champs
+        // obligatoires sont remplis correctement), alors on enregistre l'article
+        // créé en bdd
+        if ($articleform->isSubmitted() && $articleform->isValid()){
+                $entityManager->persist($article);
+                $entityManager->flush();
+
+                //Stock un message flash et l'affichera sur la prochaine page
+                $this->addFlash('success', 'Article Updated! Votre article '. $article->getTitle().' a bien été modifié!');
+
+                return $this->redirectToRoute('admin_article_list');
+        }
+
+        return $this->render('admin/admin_insert.article.html.twig', [
+            'articleForm'=> $articleform->createView()
+        ]);
+    }
+
     //Correspond au delete/suppression du crud
     /**
      * @Route("/admin/articles/delete/{id}",name="admin_article_delete")
@@ -95,6 +132,9 @@ class AdminArticlesController extends AbstractController
 
         $entityManager->remove($article);
         $entityManager->flush();
+
+        //Stock un message flash et l'affichera sur la prochaine page
+        $this->addFlash('success', 'Article Deleted! Votre article '. $article->getTitle().' a bien été supprimé!');
 
         return $this->redirectToRoute("admin_article_list");
     }

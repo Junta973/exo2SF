@@ -4,15 +4,17 @@
 namespace App\Controller\admin;
 
 use App\Entity\Category;
+use App\Form\CategorieType;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminCategoriesController extends AbstractController
 {
     /**
-     * @Route("/categories/insert", name="categorie_insert")
+     * @Route("/categories/static/insert", name="categorie_static_insert")
      */
     public function insertCategorie(EntityManagerInterface $entityManager)
     {
@@ -42,7 +44,7 @@ class AdminCategoriesController extends AbstractController
 
     /**Création de la première route*/
     /**
-     * @Route ("/admin/categories", name="admin_categories")
+     * @Route ("/admin/categories", name="admin_categories_list")
      */
     public function categorieList(CategoryRepository $categoryRepository)
     {
@@ -55,5 +57,33 @@ class AdminCategoriesController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/admin/categories/insert", name="categorie_insert")
+     */
+    public function insertCategorieViaform (Request $request,EntityManagerInterface $entityManager)
+    {
+        $categorie = New Category();
+
+        // on génère le formulaire en utilisant le gabarit + une instance de l'entité Article
+        $categorieform = $this->createForm( CategorieType::class);
+
+        // on lie le formulaire aux données de POST (aux données envoyées en POST)
+        $categorieform->handleRequest($request);
+
+        // si le formulaire a été posté et qu'il est valide (que tous les champs
+        // obligatoires sont remplis correctement), alors on enregistre l'article
+        //crééé en BDD
+        if($categorieform->isSubmitted() && $categorieform->isValid()){
+            $entityManager->persist($categorie);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('admin_categories_list');
+        }
+
+        return $this->render('admin/admin_insert.categorie.html.twig',[
+            'categorieform'=>$categorieform->createView()
+        ]);
+
+    }
 }
 

@@ -5,6 +5,7 @@ namespace App\Entity;
 
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
@@ -28,17 +29,26 @@ class Article
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(message="Veuillez renseigner le champ Titre svp !")
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Veuillez écrire votre article svp !")
+     * @Assert\Length(
+     *     min=5,
+     *     max=300,
+     *     minMessage="Vous devez écrire plus de 5 caractères",
+     *     maxMessage="Vous devez écrire moins de 300 caractères"
+     * )
      */
     private $content;
 
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\NotBlank(message="Veuillez indiquer la date svp !")
      */
     private $createdAt;
 

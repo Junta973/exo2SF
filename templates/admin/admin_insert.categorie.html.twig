@@ -1,0 +1,34 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block main %}
+
+    {#ouverture de la balise form #}
+    {{ form_start(categorieform) }}
+        <h1>Ajouter votre categorie</h1>
+
+        <div class="form-group">
+            {#permet de rendre l'input du champs title #}
+            {{ form_widget(categorieform.title, {'attr' : {'class'  : 'FormInput','placeholder' : 'Titre'}}) }}
+            {#permet d'afficher un message d'erreur s'il y a un souci sur le champ title du formulaire #}
+            {{ form_errors(categorieform.title) }}
+        </div>
+
+
+        <div class="form-group">
+            {#permet de rendre l'input du champs content #}
+            {{ form_widget(categorieform.description, {'attr' : {'class'  : 'TextArea','placeholder' : 'Article'}}) }}
+            {#permet d'afficher un message d'erreur s'il y a un souci sur le champ content du formulaire #}
+            {{ form_errors(categorieform.description) }}
+        </div>
+
+
+
+        <div>
+            {#permet de rendre le bouton submit #}
+            {{ form_widget(categorieform.submit,{'attr' : {'class'  : 'btn'},'label': 'Soumettre'}) }}
+        </div>
+
+    {#fermerture de la balise form #}
+    {{ form_end(categorieform) }}
+
+{% endblock %}

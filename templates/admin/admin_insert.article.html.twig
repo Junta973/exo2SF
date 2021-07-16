@@ -1,0 +1,69 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block main %}
+
+    {#ouverture de la balise form #}
+    {{ form_start(articleForm) }}
+        <h1>Ajouter votre article</h1>
+
+        <div class="form-group">
+            {#permet de rendre l'input du champs title #}
+            {{ form_widget(articleForm.title, {'attr' : {'class'  : 'FormInput','placeholder' : 'Titre'}}) }}
+            {#permet d'afficher un message d'erreur s'il y a un souci sur le champ title du formulaire #}
+            {{ form_errors(articleForm.title) }}
+        </div>
+
+
+        <div class="form-group">
+            {#permet de rendre l'input du champs content #}
+            {{ form_widget(articleForm.content, {'attr' : {'class'  : 'TextArea','placeholder' : 'Article'}}) }}
+            {#permet d'afficher un message d'erreur s'il y a un souci sur le champ content du formulaire #}
+            {{ form_errors(articleForm.content) }}
+        </div>
+
+        <div class="form-group">
+            {#permet de rendre le label du categorie #}
+            {{ form_label(articleForm.category, 'Categorie', {'label_attr' : {'class'  : 'label'}}) }}
+            {#permet de rendre l'input du champs categorie #}
+            {{ form_widget(articleForm.category,{'attr' : {'class'  : 'form-control'}}) }}
+            {#permet d'afficher un message d'erreur s'il y a un souci sur le champ category du formulaire #}
+            {{ form_errors(articleForm.category) }}
+        </div>
+
+        <div class="form-group">
+            {#permet de rendre le label du champs tag #}
+            {{ form_label(articleForm.tag, 'Tag', {'label_attr' : {'class'  : 'label'}}) }}
+            {#permet de rendre l'input du champs tag #}
+            {{ form_widget(articleForm.tag,{'attr' : {'class'  : 'form-control'}}) }}
+            {#permet d'afficher un message d'erreur s'il y a un souci sur le champ tag du formulaire #}
+            {{ form_errors(articleForm.tag) }}
+        </div>
+
+
+        <div class="form-group">
+            {#permet de rendre le label du champs ispublished #}
+            {{ form_label(articleForm.createdAt, 'Date de parution', {'label_attr' : {'class'  : 'label'}}) }}
+            {#permet de rendre l'input du champs createdAt #}
+            {{ form_widget(articleForm.createdAt,{'attr' : {'class'  : 'form-control'}}) }}
+            {#permet d'afficher un message d'erreur s'il y a un souci sur le champ createdAt du formulaire #}
+            {{ form_errors(articleForm.createdAt) }}
+        </div>
+
+        <div class="form-group">
+            {#permet de rendre le label du champs Ispublished #}
+            {{ form_label(articleForm.Ispublished, 'Publié ?', {'label_attr' : {'class'  : 'label'}}) }}
+            {#permet de rendre l'input du champs Ispublished #}
+            {{ form_widget(articleForm.Ispublished,{'attr' : {'class'  : 'formchoice'}}) }}
+            {#permet d'afficher un message d'erreur s'il y a un souci sur le champ Ispublished du formulaire #}
+            {{ form_errors(articleForm.Ispublished) }}
+        </div>
+
+        <div>
+            {#permet de rendre le bouton submit #}
+            {{ form_widget(articleForm.submit,{'attr' : {'class'  : 'btn'},'label': 'Soumettre'}) }}
+        </div>
+
+    {#fermerture de la balise form #}
+    {{ form_end(articleForm) }}
+
+{% endblock %}
